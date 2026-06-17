@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import userPhoto from "@/assets/user-photo.png";
 
@@ -8,13 +8,22 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [progress, setProgress] = useState(8);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const id = setInterval(() => {
-      setProgress((p) => (p >= 100 ? 8 : p + 1.2));
+      setProgress((p) => {
+        const next = p + 1.2;
+        if (next >= 100) {
+          clearInterval(id);
+          setTimeout(() => navigate({ to: "/choice" }), 400);
+          return 100;
+        }
+        return next;
+      });
     }, 90);
     return () => clearInterval(id);
-  }, []);
+  }, [navigate]);
 
   return (
     <main className="min-h-screen w-full bg-[#1a1410] text-[#e9dcc4] font-serif overflow-hidden">
