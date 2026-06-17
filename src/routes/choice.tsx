@@ -92,8 +92,8 @@ function Card({
       </div>
 
       <h3
-        className="text-[#e9dcc4] tracking-[0.12em] leading-tight"
-        style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(1.1rem,4vw,1.4rem)" }}
+        className="text-[#e9dcc4] tracking-[0.1em] leading-tight"
+        style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(0.95rem,3.4vw,1.25rem)" }}
       >
         {title}
       </h3>
@@ -178,15 +178,15 @@ function ChoicePage() {
         <Divider />
 
         {/* Cards */}
-        <section className="w-full grid grid-cols-2 gap-4 sm:gap-6">
-          <Link to="/" className="contents">
+        <section className="w-full grid grid-cols-2 gap-3 sm:gap-5 items-stretch">
+          <Link to="/" className="flex">
             <Card
               icon={<MortarIcon />}
               title={<>COMPOSER<br />MON MENU</>}
               description="Composez votre propre voyage en sélectionnant vos plats préférés."
             />
           </Link>
-          <Link to="/" className="contents">
+          <Link to="/" className="flex">
             <Card
               icon={<ClocheIcon />}
               title={<>FAIRE CONFIANCE<br />À LA CHEFFE</>}
