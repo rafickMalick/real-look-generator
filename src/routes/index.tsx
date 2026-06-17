@@ -73,8 +73,8 @@ function Index() {
         {/* Portrait */}
         <figure className="mt-10 w-full max-w-md px-4">
           <img
-            src={portrait}
-            alt="Georgiana, Cheffe de L'Ami"
+            src={userPhoto}
+            alt="Photo envoyée"
             width={1024}
             height={1024}
             className="w-full h-auto rounded-full"
