@@ -75,13 +75,7 @@ function Index() {
           <img
             src={userPhoto}
             alt="Photo envoyée"
-            width={1024}
-            height={1024}
-            className="w-full h-auto rounded-full"
-            style={{
-              maskImage: "radial-gradient(circle at center, black 62%, transparent 75%)",
-              WebkitMaskImage: "radial-gradient(circle at center, black 62%, transparent 75%)",
-            }}
+            className="w-full h-auto"
           />
         </figure>
 
