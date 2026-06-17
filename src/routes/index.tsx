@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import portrait from "@/assets/lami-portrait.jpg";
+import userPhoto from "@/assets/user-photo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -73,15 +73,9 @@ function Index() {
         {/* Portrait */}
         <figure className="mt-10 w-full max-w-md px-4">
           <img
-            src={portrait}
-            alt="Georgiana, Cheffe de L'Ami"
-            width={1024}
-            height={1024}
-            className="w-full h-auto rounded-full"
-            style={{
-              maskImage: "radial-gradient(circle at center, black 62%, transparent 75%)",
-              WebkitMaskImage: "radial-gradient(circle at center, black 62%, transparent 75%)",
-            }}
+            src={userPhoto}
+            alt="Photo envoyée"
+            className="w-full h-auto"
           />
         </figure>
 
