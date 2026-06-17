@@ -92,8 +92,8 @@ function Card({
       </div>
 
       <h3
-        className="text-[#e9dcc4] tracking-[0.12em] leading-tight"
-        style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(1.1rem,4vw,1.4rem)" }}
+        className="text-[#e9dcc4] tracking-[0.1em] leading-tight"
+        style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(0.95rem,3.4vw,1.25rem)" }}
       >
         {title}
       </h3>
