@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MenusRouteImport } from './routes/menus'
 import { Route as ChoiceRouteImport } from './routes/choice'
 import { Route as IndexRouteImport } from './routes/index'
 
+const MenusRoute = MenusRouteImport.update({
+  id: '/menus',
+  path: '/menus',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChoiceRoute = ChoiceRouteImport.update({
   id: '/choice',
   path: '/choice',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/choice': typeof ChoiceRoute
+  '/menus': typeof MenusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/choice': typeof ChoiceRoute
+  '/menus': typeof MenusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/choice': typeof ChoiceRoute
+  '/menus': typeof MenusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/choice'
+  fullPaths: '/' | '/choice' | '/menus'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/choice'
-  id: '__root__' | '/' | '/choice'
+  to: '/' | '/choice' | '/menus'
+  id: '__root__' | '/' | '/choice' | '/menus'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChoiceRoute: typeof ChoiceRoute
+  MenusRoute: typeof MenusRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/menus': {
+      id: '/menus'
+      path: '/menus'
+      fullPath: '/menus'
+      preLoaderRoute: typeof MenusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/choice': {
       id: '/choice'
       path: '/choice'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChoiceRoute: ChoiceRoute,
+  MenusRoute: MenusRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
