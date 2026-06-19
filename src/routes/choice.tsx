@@ -186,7 +186,7 @@ function ChoicePage() {
               description="Composez votre propre voyage en sélectionnant vos plats préférés."
             />
           </Link>
-          <Link to="/" className="flex">
+          <Link to="/menus" className="flex">
             <Card
               icon={<ClocheIcon />}
               title={<>FAIRE CONFIANCE<br />À LA CHEFFE</>}
