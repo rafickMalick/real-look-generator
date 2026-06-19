@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MenusRouteImport } from './routes/menus'
+import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ChoiceRouteImport } from './routes/choice'
 import { Route as IndexRouteImport } from './routes/index'
 
 const MenusRoute = MenusRouteImport.update({
   id: '/menus',
   path: '/menus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceRoute = ExperienceRouteImport.update({
+  id: '/experience',
+  path: '/experience',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChoiceRoute = ChoiceRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/choice': typeof ChoiceRoute
+  '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/choice': typeof ChoiceRoute
+  '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/choice': typeof ChoiceRoute
+  '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/choice' | '/menus'
+  fullPaths: '/' | '/choice' | '/experience' | '/menus'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/choice' | '/menus'
-  id: '__root__' | '/' | '/choice' | '/menus'
+  to: '/' | '/choice' | '/experience' | '/menus'
+  id: '__root__' | '/' | '/choice' | '/experience' | '/menus'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChoiceRoute: typeof ChoiceRoute
+  ExperienceRoute: typeof ExperienceRoute
   MenusRoute: typeof MenusRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/menus'
       fullPath: '/menus'
       preLoaderRoute: typeof MenusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience': {
+      id: '/experience'
+      path: '/experience'
+      fullPath: '/experience'
+      preLoaderRoute: typeof ExperienceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/choice': {
@@ -88,8 +105,19 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChoiceRoute: ChoiceRoute,
+  ExperienceRoute: ExperienceRoute,
   MenusRoute: MenusRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
