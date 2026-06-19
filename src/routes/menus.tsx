@@ -240,33 +240,39 @@ function MenusPage() {
 
         {/* Menu cards */}
         <section className="mt-6 flex flex-col gap-4">
-          <MenuCard
-            title="MENU DÉCOUVERTE"
-            steps="4 ÉTAPES"
-            description="Une immersion délicate en quatre temps."
-            tag="Idéal pour une première expérience"
-            image="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=70"
-            bgGradient="linear-gradient(90deg, #0d1822 0%, #122436 60%, #0d1822 100%)"
-            borderColor="rgba(40,70,100,0.5)"
-          />
-          <MenuCard
-            title="MENU DÉGUSTATION"
-            steps="7 ÉTAPES"
-            description="Le grand voyage gastronomique du Chef."
-            tag="L'expérience signature de L'Ami"
-            image="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=70"
-            bgGradient="linear-gradient(90deg, #2a0d14 0%, #3d1620 60%, #2a0d14 100%)"
-            borderColor="rgba(120,40,55,0.5)"
-          />
-          <MenuCard
-            title="MENU VÉGÉTARIEN"
-            steps="5 ÉTAPES"
-            description="La nature sublimée en cinq actes."
-            tag="Créatif, végétal et gourmand"
-            image="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=70"
-            bgGradient="linear-gradient(90deg, #0e1a0e 0%, #16261a 60%, #0e1a0e 100%)"
-            borderColor="rgba(50,90,55,0.5)"
-          />
+          <Link to="/experience">
+            <MenuCard
+              title="MENU DÉCOUVERTE"
+              steps="4 ÉTAPES"
+              description="Une immersion délicate en quatre temps."
+              tag="Idéal pour une première expérience"
+              image="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=70"
+              bgGradient="linear-gradient(90deg, #0d1822 0%, #122436 60%, #0d1822 100%)"
+              borderColor="rgba(40,70,100,0.5)"
+            />
+          </Link>
+          <Link to="/experience">
+            <MenuCard
+              title="MENU DÉGUSTATION"
+              steps="7 ÉTAPES"
+              description="Le grand voyage gastronomique du Chef."
+              tag="L'expérience signature de L'Ami"
+              image="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=70"
+              bgGradient="linear-gradient(90deg, #2a0d14 0%, #3d1620 60%, #2a0d14 100%)"
+              borderColor="rgba(120,40,55,0.5)"
+            />
+          </Link>
+          <Link to="/experience">
+            <MenuCard
+              title="MENU VÉGÉTARIEN"
+              steps="5 ÉTAPES"
+              description="La nature sublimée en cinq actes."
+              tag="Créatif, végétal et gourmand"
+              image="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=70"
+              bgGradient="linear-gradient(90deg, #0e1a0e 0%, #16261a 60%, #0e1a0e 100%)"
+              borderColor="rgba(50,90,55,0.5)"
+            />
+          </Link>
         </section>
 
         {/* Quote */}
