@@ -74,7 +74,7 @@ function CartePage() {
       className="min-h-screen w-full text-[#e9dcc4] relative overflow-x-hidden pb-28"
       style={{ background: "#0a0604", fontFamily: SERIF }}
     >
-      <div className="max-w-2xl mx-auto px-5 pt-6">
+      <div className="max-w-6xl mx-auto px-5 pt-6">
         {/* Top bar */}
         <div className="flex items-center justify-between">
           <button
@@ -151,24 +151,24 @@ function CartePage() {
 
         {/* Hero dish slider */}
         <div className="mt-6 relative">
-          <div className="relative rounded-full overflow-hidden aspect-square">
+          <div className="relative overflow-hidden aspect-[16/10] rounded-2xl">
             <img
               src={heroImg}
               alt="Plat signature"
-              width={1024}
-              height={1024}
+              width={1600}
+              height={1000}
               className="w-full h-full object-cover"
             />
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle at center, transparent 55%, rgba(10,6,4,0.85) 90%)",
+                  "radial-gradient(ellipse at center, transparent 50%, rgba(10,6,4,0.75) 95%)",
               }}
             />
           </div>
           <button
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full border border-[#c9a96a]/40 flex items-center justify-center text-[#c9a96a] bg-[#0a0604]/60"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[#c9a96a]/40 flex items-center justify-center text-[#c9a96a] bg-[#0a0604]/40"
             aria-label="Précédent"
           >
             <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -176,7 +176,7 @@ function CartePage() {
             </svg>
           </button>
           <button
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full border border-[#c9a96a]/40 flex items-center justify-center text-[#c9a96a] bg-[#0a0604]/60"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-[#c9a96a]/40 flex items-center justify-center text-[#c9a96a] bg-[#0a0604]/40"
             aria-label="Suivant"
           >
             <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -208,7 +208,7 @@ function CartePage() {
           </button>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-5 grid grid-cols-4 gap-3">
           {DISHES.map((dish, idx) => {
             const selected = selectedIdx === idx;
             return (
@@ -319,8 +319,8 @@ function CartePage() {
             <span className="text-[#e9dcc4]">
               <span className="text-[#c9a96a]">0</span> PLAT SÉLECTIONNÉ
             </span>
-            <span className="hidden xs:inline text-[#c9b896]/60 tracking-[0.2em]">TOTAL</span>
-            <span className="hidden xs:inline text-[#e9dcc4]">0 XOF</span>
+            <span className="text-[#c9b896]/60 tracking-[0.2em]">TOTAL</span>
+            <span className="text-[#e9dcc4]">0 XOF</span>
           </div>
           <button
             className="px-4 h-11 rounded-full flex items-center gap-2 text-[#0a0604] tracking-[0.15em] text-[0.78rem] font-medium shrink-0"
