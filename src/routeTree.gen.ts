@@ -15,11 +15,6 @@ import { Route as ChoiceRouteImport } from './routes/choice'
 import { Route as CarteRouteImport } from './routes/carte'
 import { Route as IndexRouteImport } from './routes/index'
 
-const CarteRoute = CarteRouteImport.update({
-  id: '/carte',
-  path: '/carte',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MenusRoute = MenusRouteImport.update({
   id: '/menus',
   path: '/menus',
@@ -33,6 +28,11 @@ const ExperienceRoute = ExperienceRouteImport.update({
 const ChoiceRoute = ChoiceRouteImport.update({
   id: '/choice',
   path: '/choice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarteRoute = CarteRouteImport.update({
+  id: '/carte',
+  path: '/carte',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
