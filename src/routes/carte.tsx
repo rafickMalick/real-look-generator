@@ -74,7 +74,7 @@ function CartePage() {
       className="min-h-screen w-full text-[#e9dcc4] relative overflow-x-hidden pb-28"
       style={{ background: "#0a0604", fontFamily: SERIF }}
     >
-      <div className="max-w-2xl mx-auto px-5 pt-6">
+      <div className="max-w-6xl mx-auto px-5 pt-6">
         {/* Top bar */}
         <div className="flex items-center justify-between">
           <button
