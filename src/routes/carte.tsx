@@ -208,7 +208,7 @@ function CartePage() {
           </button>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-5 grid grid-cols-4 gap-3">
           {DISHES.map((dish, idx) => {
             const selected = selectedIdx === idx;
             return (
