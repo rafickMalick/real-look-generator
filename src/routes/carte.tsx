@@ -319,8 +319,8 @@ function CartePage() {
             <span className="text-[#e9dcc4]">
               <span className="text-[#c9a96a]">0</span> PLAT SÉLECTIONNÉ
             </span>
-            <span className="hidden xs:inline text-[#c9b896]/60 tracking-[0.2em]">TOTAL</span>
-            <span className="hidden xs:inline text-[#e9dcc4]">0 XOF</span>
+            <span className="text-[#c9b896]/60 tracking-[0.2em]">TOTAL</span>
+            <span className="text-[#e9dcc4]">0 XOF</span>
           </div>
           <button
             className="px-4 h-11 rounded-full flex items-center gap-2 text-[#0a0604] tracking-[0.15em] text-[0.78rem] font-medium shrink-0"
