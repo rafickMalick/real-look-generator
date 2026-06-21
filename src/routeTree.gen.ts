@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as MenusRouteImport } from './routes/menus'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ChoiceRouteImport } from './routes/choice'
+import { Route as CarteRouteImport } from './routes/carte'
 import { Route as IndexRouteImport } from './routes/index'
 
 const MenusRoute = MenusRouteImport.update({
@@ -29,6 +30,11 @@ const ChoiceRoute = ChoiceRouteImport.update({
   path: '/choice',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CarteRoute = CarteRouteImport.update({
+  id: '/carte',
+  path: '/carte',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/carte': typeof CarteRoute
   '/choice': typeof ChoiceRoute
   '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/carte': typeof CarteRoute
   '/choice': typeof ChoiceRoute
   '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/carte': typeof CarteRoute
   '/choice': typeof ChoiceRoute
   '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/choice' | '/experience' | '/menus'
+  fullPaths: '/' | '/carte' | '/choice' | '/experience' | '/menus'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/choice' | '/experience' | '/menus'
-  id: '__root__' | '/' | '/choice' | '/experience' | '/menus'
+  to: '/' | '/carte' | '/choice' | '/experience' | '/menus'
+  id: '__root__' | '/' | '/carte' | '/choice' | '/experience' | '/menus'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CarteRoute: typeof CarteRoute
   ChoiceRoute: typeof ChoiceRoute
   ExperienceRoute: typeof ExperienceRoute
   MenusRoute: typeof MenusRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChoiceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/carte': {
+      id: '/carte'
+      path: '/carte'
+      fullPath: '/carte'
+      preLoaderRoute: typeof CarteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CarteRoute: CarteRoute,
   ChoiceRoute: ChoiceRoute,
   ExperienceRoute: ExperienceRoute,
   MenusRoute: MenusRoute,
@@ -111,13 +129,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

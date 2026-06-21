@@ -179,7 +179,7 @@ function ChoicePage() {
 
         {/* Cards */}
         <section className="w-full grid grid-cols-2 gap-3 sm:gap-5 items-stretch">
-          <Link to="/" className="flex">
+          <Link to="/carte" className="flex">
             <Card
               icon={<MortarIcon />}
               title={<>COMPOSER<br />MON MENU</>}
