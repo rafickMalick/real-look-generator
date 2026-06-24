@@ -114,6 +114,22 @@ function Card({
   );
 }
 
+function LangButton() {
+  return (
+    <button
+      type="button"
+      className="flex items-center gap-1.5 px-3 h-9 rounded-md border text-sm transition hover:bg-[#c9a96a]/10"
+      style={{ borderColor: "rgba(201,169,106,0.4)", color: "#e9dcc4", fontFamily: SERIF }}
+      aria-label="Changer de langue"
+    >
+      FR
+      <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 9 L 12 15 L 18 9" />
+      </svg>
+    </button>
+  );
+}
+
 function ChoicePage() {
   return (
     <main
@@ -123,6 +139,10 @@ function ChoicePage() {
           "radial-gradient(ellipse at center top, #1f1610 0%, #120c08 60%, #0a0604 100%)",
       }}
     >
+      {/* Language selector — seul endroit de l'app */}
+      <div className="absolute top-4 right-5 z-20">
+        <LangButton />
+      </div>
       {/* Decorative leaves background */}
       <LeafOrnament className="absolute top-20 -left-6 w-40 h-56 text-[#c9a96a]/10 -rotate-12" />
       <LeafOrnament className="absolute top-60 -left-10 w-32 h-44 text-[#c9a96a]/[0.07] rotate-6" />

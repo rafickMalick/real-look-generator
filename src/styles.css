@@ -142,3 +142,51 @@
     color: var(--color-foreground);
   }
 }
+
+/* ── L'Ami custom keyframes ──────────────────────────────── */
+
+.lami-experience a,
+.lami-experience button {
+  transition:
+    border-color 0.75s cubic-bezier(0.76, 0, 0.24, 1),
+    background-color 0.75s cubic-bezier(0.76, 0, 0.24, 1),
+    color 0.75s cubic-bezier(0.76, 0, 0.24, 1),
+    opacity 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Voile éditorial — fondu pur, sans déplacement physique */
+@keyframes lamCurtainIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes lamCurtainOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Flottement ambiant — transform seul, pas d'opacity */
+@keyframes lamMistFloat {
+  0%   { transform: translate3d(0,     0px,  0) scale(1);    }
+  35%  { transform: translate3d(10px, -20px, 0) scale(1.02); }
+  70%  { transform: translate3d(-6px, -36px, 0) scale(0.98); }
+  100% { transform: translate3d(0,     0px,  0) scale(1);    }
+}
+
+@keyframes lamScaleIn {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lami-experience,
+  .lami-experience *,
+  .lami-experience *::before,
+  .lami-experience *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+}

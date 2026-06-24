@@ -1,4 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { ComponentType } from "react";
+import heroBg from "@/assets/menus-hero-bg.jpg";
+import plats1 from "@/assets/plats_1.png";
+import plats2 from "@/assets/plats_2.png";
+import plats3 from "@/assets/plats_3.png";
 
 export const Route = createFileRoute("/menus")({
   component: MenusPage,
@@ -11,9 +16,10 @@ export const Route = createFileRoute("/menus")({
 });
 
 const SERIF = "'Cormorant Garamond', serif";
-const SERIF_SC = "'Cormorant SC', serif";
-const GOLD = "#c9a96a";
-const CREAM = "#e9dcc4";
+const GOLD = "#C9A84C";
+const OFF_WHITE = "#F5F0E8";
+const WHITE = "#FFFFFF";
+const BG = "#0a0a0a";
 
 function LeafLogo({ className = "" }: { className?: string }) {
   return (
@@ -38,108 +44,145 @@ function ChefHat({ className = "" }: { className?: string }) {
   );
 }
 
+function HamburgerIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M4 7 H 20 M 4 12 H 20 M 4 17 H 20" />
+    </svg>
+  );
+}
+
+function CompassIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="8" />
+      <path d="M15.5 8.5 L13.5 13.5 L8.5 15.5 L10.5 10.5 Z" />
+    </svg>
+  );
+}
+
+function FeatherIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 4 C 14 4, 8 10, 8 16 C 8 18, 9.5 20, 12 20 C 18 20, 20 14, 20 8 Z" />
+      <path d="M8 16 L4 20" />
+      <path d="M10 14 H16" />
+    </svg>
+  );
+}
+
+function VegLeafIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3 C 15 7, 19 10, 19 15 C 19 18.5, 16 21, 12 21 C 8 21, 5 18.5, 5 15 C 5 10, 9 7, 12 3 Z" />
+      <path d="M12 7 V 19" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12 H 19 M 13 6 L 19 12 L 13 18" />
+    </svg>
+  );
+}
+
 function FloralDivider() {
   return (
-    <div className="flex items-center justify-center gap-3 my-4">
-      <span className="h-px w-24 bg-[#c9a96a]/40" />
-      <svg viewBox="0 0 20 20" className="w-4 h-4 text-[#c9a96a]" fill="currentColor">
-        <path d="M10 2 L11 9 L18 10 L11 11 L10 18 L9 11 L2 10 L9 9 Z" />
-      </svg>
-      <span className="h-px w-24 bg-[#c9a96a]/40" />
+    <div className="flex items-center justify-center gap-3 my-[clamp(0.8rem,2.6vw,1.2rem)]">
+      <span className="h-px w-[clamp(3.5rem,18vw,5.5rem)] bg-[#C9A84C]/70" />
+      <span className="text-[#C9A84C] text-[clamp(0.8rem,2.3vw,1rem)]">✦</span>
+      <span className="h-px w-[clamp(3.5rem,18vw,5.5rem)] bg-[#C9A84C]/70" />
     </div>
   );
 }
 
-function MenuCard({
-  title,
-  steps,
-  description,
-  tag,
-  image,
-  bgGradient,
-  borderColor,
-}: {
+type MenuCardProps = {
   title: string;
   steps: string;
   description: string;
   tag: string;
   image: string;
-  bgGradient: string;
-  borderColor: string;
-}) {
+  bgColor: string;
+  Icon: ComponentType<{ className?: string }>;
+};
+
+function MenuCard({ title, steps, description, tag, image, bgColor, Icon }: MenuCardProps) {
   return (
     <div
-      className="relative rounded-xl overflow-hidden border flex"
-      style={{
-        background: bgGradient,
-        borderColor,
-        minHeight: 200,
-      }}
+      className="group relative flex h-[clamp(10rem,35vw,13.75rem)] lg:h-[260px] flex-row overflow-hidden rounded-2xl border border-transparent transition-all duration-300 ease-in-out hover:-translate-y-[2px] hover:border-[#C9A84C]/40"
+      style={{ backgroundColor: bgColor }}
     >
-      {/* Left content */}
-      <div className="relative flex-1 p-5 flex flex-col justify-between z-10">
-        <div>
+      <div className="relative z-[2] flex w-[45%] flex-col justify-between p-[clamp(12px,3vw,20px)]">
+        <div className="min-w-0">
           <h3
-            className="text-[#e9dcc4] tracking-[0.08em] leading-tight"
-            style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(1.05rem,4.2vw,1.4rem)" }}
+            className="whitespace-nowrap leading-tight tracking-[0.08em] sm:tracking-[0.12em] uppercase"
+            style={{
+              color: WHITE,
+              fontFamily: SERIF,
+              fontWeight: 500,
+              fontSize: "clamp(0.85rem, 3.5vw, 1.1rem)",
+            }}
           >
             {title}
           </h3>
-          <div
-            className="mt-1 text-[#c9a96a] tracking-[0.2em] text-[0.7rem]"
-            style={{ fontFamily: SERIF_SC }}
+          <p
+            className="mt-0.5 tracking-[0.22em] sm:tracking-[0.28em] uppercase"
+            style={{
+              color: GOLD,
+              fontFamily: SERIF,
+              fontSize: "clamp(0.55rem, 2vw, 0.7rem)",
+            }}
           >
             {steps}
-          </div>
-          <span className="block h-px w-10 bg-[#c9a96a]/40 mt-2" />
+          </p>
+          <span className="mt-1 block h-px w-8 bg-[#C9A84C]/70" />
           <p
-            className="mt-3 text-[#e9dcc4]/85 leading-snug"
-            style={{ fontFamily: SERIF, fontSize: "0.95rem" }}
+            className="mt-1 leading-snug"
+            style={{
+              color: OFF_WHITE,
+              fontFamily: SERIF,
+              fontWeight: 300,
+              fontSize: "clamp(0.7rem, 2.5vw, 0.85rem)",
+            }}
           >
             {description}
           </p>
         </div>
 
-        <div className="flex items-end justify-between mt-4">
-          <div className="flex items-start gap-2 max-w-[60%]">
-            <div className="w-7 h-7 rounded-full border border-[#c9a96a]/50 flex items-center justify-center shrink-0 text-[#c9a96a]">
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 3 C 14 8, 18 11, 18 16 C 18 19, 15 21, 12 21 C 9 21, 6 19, 6 16 C 6 11, 10 8, 12 3 Z" />
-                <path d="M12 7 V 19" />
-              </svg>
+        <div className="mt-1.5 flex items-end justify-between gap-1">
+          <div className="flex min-w-0 max-w-[72%] items-start gap-1.5">
+            <div className="flex h-5 w-5 sm:h-6 sm:w-6 shrink-0 items-center justify-center rounded-full border border-[#C9A84C]/70 text-[#C9A84C]">
+              <Icon className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
             </div>
             <p
-              className="text-[#c9b896] text-[0.75rem] leading-tight"
-              style={{ fontFamily: SERIF }}
+              className="leading-tight"
+              style={{
+                color: GOLD,
+                fontFamily: SERIF,
+                fontSize: "clamp(0.55rem, 2vw, 0.7rem)",
+              }}
             >
               {tag}
             </p>
           </div>
-          <button
-            className="w-10 h-10 rounded-full border border-[#c9a96a]/60 flex items-center justify-center text-[#c9a96a] hover:bg-[#c9a96a]/10 transition shrink-0"
-            aria-label="Voir le menu"
-          >
-            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12 H 19 M 13 6 L 19 12 L 13 18" />
-            </svg>
-          </button>
+          <span className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full border border-[#C9A84C]/70 text-white transition-all duration-300 ease-in-out group-hover:bg-[#C9A84C]">
+            <ArrowRightIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+          </span>
         </div>
       </div>
 
-      {/* Right image with fade */}
-      <div className="relative w-[45%] shrink-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+      <div className="relative w-[55%] overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover object-center"
         />
         <div
-          className="absolute inset-0"
+          className="pointer-events-none absolute inset-0 z-[1]"
           style={{
-            background: `linear-gradient(90deg, ${borderColor.replace("0.5", "1")} 0%, transparent 40%)`,
+            background: `linear-gradient(to right, ${bgColor} 0%, transparent 60%)`,
           }}
         />
       </div>
@@ -149,79 +192,77 @@ function MenuCard({
 
 function MenusPage() {
   return (
-    <main
-      className="min-h-screen w-full text-[#e9dcc4] relative overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse at center top, #1f1610 0%, #0e0907 60%, #050302 100%)",
-      }}
-    >
-      {/* Top restaurant ambience photo */}
+    <main className="relative min-h-screen w-full overflow-x-hidden text-[#F5F0E8]" style={{ background: BG }}>
       <div
-        className="absolute top-0 left-0 right-0 h-[380px] pointer-events-none"
+        className="pointer-events-none absolute left-0 right-0 top-0 h-[clamp(17rem,42vw,25rem)]"
         style={{
-          backgroundImage:
-            "linear-gradient(180deg, rgba(10,6,4,0.5) 0%, rgba(10,6,4,0.7) 60%, #0a0604 100%), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=70')",
+          backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.75) 60%, #0a0a0a 100%), url(${heroBg})`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.6,
+          backgroundPosition: "center top",
         }}
       />
 
-      <div className="relative z-10 max-w-2xl mx-auto px-5 py-6">
-        {/* Top bar */}
+      <div className="relative z-10 mx-auto w-full max-w-[900px] px-[clamp(0.95rem,4vw,1.5rem)] py-[clamp(0.95rem,3.2vw,1.6rem)]">
         <div className="flex items-center justify-between">
-          <button
-            className="w-11 h-11 rounded-full border border-[#c9a96a]/40 flex items-center justify-center text-[#e9dcc4]"
-            aria-label="Menu"
+          <Link
+            to="/choice"
+            className="flex h-[clamp(2.4rem,5.5vw,2.9rem)] w-[clamp(2.4rem,5.5vw,2.9rem)] items-center justify-center rounded-full border border-[#C9A84C]/55 text-[#C9A84C] hover:bg-[#C9A84C]/10 transition"
+            aria-label="Retour"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M4 7 H 20 M 4 12 H 20 M 4 17 H 20" />
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 6 L 9 12 L 15 18" />
             </svg>
-          </button>
-
-          <Link to="/choice" className="flex flex-col items-center">
-            <LeafLogo className="w-6 h-8 text-[#c9a96a]" />
           </Link>
 
-          <button
-            className="px-3 h-11 rounded-md border border-[#c9a96a]/40 flex items-center gap-1.5 text-[#e9dcc4] text-sm"
-            style={{ fontFamily: SERIF }}
-          >
-            FR
-            <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9 L 12 15 L 18 9" />
-            </svg>
-          </button>
+          <div className="flex flex-col items-center text-center">
+            <LeafLogo className="h-[clamp(1.5rem,4vw,2.1rem)] w-[clamp(1.1rem,3vw,1.5rem)] text-[#C9A84C]" />
+            <span
+              className="mt-1 leading-none tracking-[0.16em]"
+              style={{
+                color: GOLD,
+                fontFamily: SERIF,
+                fontWeight: 500,
+                fontSize: "clamp(2rem,6vw,3.2rem)",
+              }}
+            >
+              L&apos;AMI
+            </span>
+            <p
+              className="mt-1 tracking-[0.42em] uppercase"
+              style={{
+                color: GOLD,
+                fontFamily: SERIF,
+                fontSize: "clamp(0.45rem,1.25vw,0.7rem)",
+              }}
+            >
+              SOFITEL BENIN
+            </p>
+          </div>
+
+          {/* Spacer pour équilibrer le header */}
+          <div className="h-[clamp(2.4rem,5.5vw,2.9rem)] w-[clamp(2.4rem,5.5vw,2.9rem)]" aria-hidden="true" />
         </div>
 
-        {/* Logo */}
-        <header className="flex flex-col items-center text-center mt-2">
-          <h1
-            className="text-[#e9dcc4] tracking-[0.18em] leading-none"
-            style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "clamp(2.4rem,8vw,3.2rem)" }}
-          >
-            L'AMI
-          </h1>
-          <div
-            className="mt-2 text-[#c9b896] tracking-[0.45em] text-[0.7rem]"
-            style={{ fontFamily: SERIF_SC }}
-          >
-            SOFITEL BENIN
-          </div>
-        </header>
-
-        {/* Welcome */}
-        <section className="mt-10 text-center">
+        <section className="mt-[clamp(1.5rem,5vw,2.7rem)] text-center">
           <h2
-            className="text-[#e9dcc4] tracking-[0.18em]"
-            style={{ fontFamily: SERIF, fontWeight: 400, fontSize: "clamp(2rem,7vw,2.8rem)" }}
+            className="tracking-[0.18em] uppercase"
+            style={{
+              color: GOLD,
+              fontFamily: SERIF,
+              fontWeight: 500,
+              fontSize: "clamp(2.5rem,8vw,4rem)",
+            }}
           >
             BIENVENUE
           </h2>
           <p
-            className="mt-3 text-[#e9dcc4]/85 leading-snug"
-            style={{ fontFamily: SERIF, fontSize: "1.05rem" }}
+            className="mt-2 leading-snug"
+            style={{
+              color: OFF_WHITE,
+              fontFamily: SERIF,
+              fontWeight: 300,
+              fontSize: "clamp(1rem,2.2vw,1.35rem)",
+            }}
           >
             Commencez votre voyage
             <br />
@@ -232,70 +273,83 @@ function MenusPage() {
         <FloralDivider />
 
         <p
-          className="text-center text-[#c9a96a] tracking-wide"
-          style={{ fontFamily: SERIF, fontSize: "1rem" }}
+          className="text-center italic tracking-wide"
+          style={{
+            color: GOLD,
+            fontFamily: SERIF,
+            fontWeight: 300,
+            fontSize: "clamp(1rem,2vw,1.35rem)",
+          }}
         >
           Choisissez votre destination
         </p>
 
-        {/* Menu cards */}
-        <section className="mt-6 flex flex-col gap-4">
-          <Link to="/experience">
+        <section className="mt-[clamp(1rem,2.7vw,1.7rem)] flex flex-col gap-[clamp(10px,2vw,16px)]">
+          <Link to="/experience" className="block">
             <MenuCard
               title="MENU DÉCOUVERTE"
               steps="4 ÉTAPES"
               description="Une immersion délicate en quatre temps."
               tag="Idéal pour une première expérience"
-              image="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=70"
-              bgGradient="linear-gradient(90deg, #0d1822 0%, #122436 60%, #0d1822 100%)"
-              borderColor="rgba(40,70,100,0.5)"
+              image={plats1}
+              bgColor="#091117"
+              Icon={CompassIcon}
             />
           </Link>
-          <Link to="/experience">
+          <Link to="/experience" className="block">
             <MenuCard
               title="MENU DÉGUSTATION"
               steps="7 ÉTAPES"
               description="Le grand voyage gastronomique du Chef."
               tag="L'expérience signature de L'Ami"
-              image="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=70"
-              bgGradient="linear-gradient(90deg, #2a0d14 0%, #3d1620 60%, #2a0d14 100%)"
-              borderColor="rgba(120,40,55,0.5)"
+              image={plats2}
+              bgColor="#19060a"
+              Icon={FeatherIcon}
             />
           </Link>
-          <Link to="/experience">
+          <Link to="/experience" className="block">
             <MenuCard
               title="MENU VÉGÉTARIEN"
               steps="5 ÉTAPES"
               description="La nature sublimée en cinq actes."
               tag="Créatif, végétal et gourmand"
-              image="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=70"
-              bgGradient="linear-gradient(90deg, #0e1a0e 0%, #16261a 60%, #0e1a0e 100%)"
-              borderColor="rgba(50,90,55,0.5)"
+              image={plats3}
+              bgColor="#0a140b"
+              Icon={VegLeafIcon}
             />
           </Link>
         </section>
 
-        {/* Quote */}
-        <div className="mt-12 flex flex-col items-center">
+        <div className="mt-[clamp(2.2rem,6vw,3.2rem)] flex flex-col items-center pb-[clamp(1.2rem,4vw,2rem)]">
           <div className="flex items-center gap-3">
-            <span className="h-px w-20 bg-[#c9a96a]/40" />
-            <ChefHat className="w-7 h-7 text-[#c9a96a]" />
-            <span className="h-px w-20 bg-[#c9a96a]/40" />
+            <span className="h-px w-[clamp(3.6rem,18vw,8rem)] bg-[#C9A84C]/60" />
+            <ChefHat className="h-[clamp(1.15rem,2.5vw,1.5rem)] w-[clamp(1.15rem,2.5vw,1.5rem)] text-[#C9A84C]" />
+            <span className="h-px w-[clamp(3.6rem,18vw,8rem)] bg-[#C9A84C]/60" />
           </div>
-          <blockquote className="mt-6 text-center pb-12">
+          <blockquote className="mt-[clamp(0.9rem,2.7vw,1.35rem)] text-center">
             <p
-              className="text-[#c9a96a] italic leading-relaxed"
-              style={{ fontFamily: SERIF, fontSize: "1.05rem" }}
+              className="italic leading-relaxed"
+              style={{
+                color: OFF_WHITE,
+                fontFamily: SERIF,
+                fontWeight: 300,
+                fontSize: "clamp(0.95rem,2vw,1.25rem)",
+              }}
             >
-              "Chaque plat est une rencontre.
+              &ldquo;Chaque plat est une rencontre.
               <br />
-              Chaque repas, une histoire."
+              Chaque repas, une histoire.&rdquo;
             </p>
             <footer
-              className="mt-3 text-[#e9dcc4]/80 text-sm"
-              style={{ fontFamily: SERIF }}
+              className="mt-2"
+              style={{
+                color: OFF_WHITE,
+                fontFamily: SERIF,
+                fontWeight: 300,
+                fontSize: "clamp(0.82rem,1.7vw,1.05rem)",
+              }}
             >
-              – Le Chef de L'Ami
+              – Le Chef de L&apos;Ami
             </footer>
           </blockquote>
         </div>
