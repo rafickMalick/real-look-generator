@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -11,6 +12,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CartProvider } from "../contexts/cart";
+import { TransitionProvider } from "../contexts/transition";
+import { I18nProvider } from "../contexts/i18n";
+import { PageTransition } from "../components/PageTransition";
 
 function NotFoundComponent() {
   return (
@@ -116,11 +121,19 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { location } = useRouterState();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <I18nProvider>
+        <CartProvider>
+          <TransitionProvider>
+            <PageTransition key={location.pathname}>
+              <Outlet />
+            </PageTransition>
+          </TransitionProvider>
+        </CartProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }

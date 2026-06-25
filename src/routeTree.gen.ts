@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SelectionRouteImport } from './routes/selection'
 import { Route as MenusRouteImport } from './routes/menus'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ChoiceRouteImport } from './routes/choice'
 import { Route as CarteRouteImport } from './routes/carte'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SelectionRoute = SelectionRouteImport.update({
+  id: '/selection',
+  path: '/selection',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MenusRoute = MenusRouteImport.update({
   id: '/menus',
   path: '/menus',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/choice': typeof ChoiceRoute
   '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
+  '/selection': typeof SelectionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/choice': typeof ChoiceRoute
   '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
+  '/selection': typeof SelectionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,27 @@ export interface FileRoutesById {
   '/choice': typeof ChoiceRoute
   '/experience': typeof ExperienceRoute
   '/menus': typeof MenusRoute
+  '/selection': typeof SelectionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/carte' | '/choice' | '/experience' | '/menus'
+  fullPaths:
+    | '/'
+    | '/carte'
+    | '/choice'
+    | '/experience'
+    | '/menus'
+    | '/selection'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/carte' | '/choice' | '/experience' | '/menus'
-  id: '__root__' | '/' | '/carte' | '/choice' | '/experience' | '/menus'
+  to: '/' | '/carte' | '/choice' | '/experience' | '/menus' | '/selection'
+  id:
+    | '__root__'
+    | '/'
+    | '/carte'
+    | '/choice'
+    | '/experience'
+    | '/menus'
+    | '/selection'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,10 +99,18 @@ export interface RootRouteChildren {
   ChoiceRoute: typeof ChoiceRoute
   ExperienceRoute: typeof ExperienceRoute
   MenusRoute: typeof MenusRoute
+  SelectionRoute: typeof SelectionRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/selection': {
+      id: '/selection'
+      path: '/selection'
+      fullPath: '/selection'
+      preLoaderRoute: typeof SelectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/menus': {
       id: '/menus'
       path: '/menus'
@@ -125,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChoiceRoute: ChoiceRoute,
   ExperienceRoute: ExperienceRoute,
   MenusRoute: MenusRoute,
+  SelectionRoute: SelectionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

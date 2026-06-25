@@ -1,9 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useCart } from "../contexts/cart";
+import { useTransitionStore, originFrom } from "../contexts/transition";
+import { useI18n } from "../contexts/i18n";
+import { CATEGORIES, DISHES, type Category } from "../data/dishes";
 import { useState } from "react";
-import carpaccioImg from "@/assets/dish-carpaccio.jpg";
-import filetImg from "@/assets/dish-acte1.jpg";
-import agneauImg from "@/assets/dish-agneau.jpg";
-import chocolatImg from "@/assets/dish-chocolat.jpg";
 
 export const Route = createFileRoute("/carte")({
   component: CartePage,
@@ -21,6 +21,7 @@ const GOLD = "#c9a96a";
 const CREAM = "#e9dcc4";
 const MUTED = "#c9b896";
 const BG = "#0a0604";
+const EASE = "cubic-bezier(.4,.02,.18,1)";
 
 function LeafLogo({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -35,75 +36,60 @@ function LeafLogo({ className = "", style }: { className?: string; style?: React
   );
 }
 
-const CATEGORIES = ["TOUS", "ENTRÉES", "PLATS", "DESSERTS", "BOISSONS"] as const;
-
-type Category = (typeof CATEGORIES)[number];
-
-type Dish = {
-  name: string;
-  desc: string;
-  price: string;
-  category: Exclude<Category, "TOUS">;
-  image: string;
-  signature: boolean;
-};
-
-const DISHES: Dish[] = [
-  {
-    name: "Carpaccio de gambas",
-    desc: "Agrumes du Bénin, mangue verte, huile de gingembre.",
-    price: "12 000",
-    category: "ENTRÉES",
-    image: carpaccioImg,
-    signature: false,
-  },
-  {
-    name: "Le Filet des Rives du Mono",
-    desc: "Maïs fumé, légumes de saison, émulsion au beurre noisette.",
-    price: "24 000",
-    category: "PLATS",
-    image: filetImg,
-    signature: true,
-  },
-  {
-    name: "Agneau du terroir",
-    desc: "Cuit lentement, jus corsé au djon djon, légumes rôtis.",
-    price: "22 000",
-    category: "PLATS",
-    image: agneauImg,
-    signature: false,
-  },
-  {
-    name: "Chocolat & fève de tonka",
-    desc: "Crémeux chocolat noir, croustillant praliné, glace fève de tonka.",
-    price: "9 000",
-    category: "DESSERTS",
-    image: chocolatImg,
-    signature: false,
-  },
-];
-
 function CartePage() {
   const [activeCat, setActiveCat] = useState<Category>("TOUS");
-  const [selected, setSelected] = useState<Set<number>>(new Set());
+  const [selectedDishIdx, setSelectedDishIdx] = useState<number | null>(null);
+  const [overlayOrigin, setOverlayOrigin] = useState("50% 50%");
+  const [isClosingOverlay, setIsClosingOverlay] = useState(false);
+
+  const { ids, toggle } = useCart();
+  const { set } = useTransitionStore();
+  const navigate = useNavigate();
+  const { t } = useI18n();
+
+  const catLabels: Record<Category, string> = {
+    TOUS: t.cat_all,
+    ENTRÉES: t.cat_starters,
+    PLATS: t.cat_mains,
+    DESSERTS: t.cat_desserts,
+    BOISSONS: t.cat_drinks,
+  };
 
   const filtered = DISHES.filter(
     (d) => activeCat === "TOUS" || d.category === activeCat
   );
 
-  const toggle = (idx: number) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx);
-      else next.add(idx);
-      return next;
-    });
-  };
-
-  const total = [...selected].reduce((sum, i) => {
+  const total = [...ids].reduce((sum, i) => {
     const price = Number(DISHES[i]?.price.replace(/\s/g, "") ?? 0);
     return sum + price;
   }, 0);
+
+  const handleGoSelection = (e: React.MouseEvent) => {
+    if (ids.size === 0) return;
+    set({ type: "grow", origin: originFrom(e) });
+    navigate({ to: "/selection" });
+  };
+
+  const openDetail = (e: React.MouseEvent, idx: number) => {
+    setOverlayOrigin(originFrom(e));
+    setIsClosingOverlay(false);
+    setSelectedDishIdx(idx);
+  };
+
+  const closeDetail = () => {
+    setIsClosingOverlay(true);
+  };
+
+  const handleOverlayAnimEnd = () => {
+    if (isClosingOverlay) {
+      setSelectedDishIdx(null);
+      setIsClosingOverlay(false);
+    }
+  };
+
+  const dish = selectedDishIdx !== null ? DISHES[selectedDishIdx] : null;
+  const tr = selectedDishIdx !== null ? t.dishes[selectedDishIdx] : null;
+  const isSelected = selectedDishIdx !== null ? ids.has(selectedDishIdx) : false;
 
   return (
     <main
@@ -114,8 +100,9 @@ function CartePage() {
 
         {/* ── TOP BAR ── */}
         <div className="flex items-center justify-between">
-          <Link
-            to="/choice"
+          <button
+            type="button"
+            onClick={(e) => { set({ type: "back", origin: originFrom(e) }); navigate({ to: "/choice" }); }}
             className="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-[#c9a96a]/10 transition"
             style={{ borderColor: `${GOLD}45` }}
             aria-label="Retour"
@@ -123,9 +110,13 @@ function CartePage() {
             <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 6 L 9 12 L 15 18" />
             </svg>
-          </Link>
+          </button>
 
-          <Link to="/choice" className="flex flex-col items-center">
+          <button
+            type="button"
+            onClick={(e) => { set({ type: "back", origin: originFrom(e) }); navigate({ to: "/choice" }); }}
+            className="flex flex-col items-center"
+          >
             <LeafLogo className="w-5 h-7" style={{ color: GOLD } as React.CSSProperties} />
             <span
               className="mt-1 tracking-[0.16em] leading-none"
@@ -139,9 +130,8 @@ function CartePage() {
             >
               SOFITEL BENIN
             </span>
-          </Link>
+          </button>
 
-          {/* Spacer pour équilibrer le header */}
           <div className="w-10 h-10" aria-hidden="true" />
         </div>
 
@@ -151,7 +141,7 @@ function CartePage() {
             className="tracking-[0.14em] uppercase"
             style={{ fontFamily: SERIF, fontWeight: 400, fontSize: "clamp(2rem,7vw,2.8rem)", color: CREAM }}
           >
-            NOTRE CARTE
+            {t.carte_title}
           </h1>
           <div className="flex items-center justify-center gap-3 mt-2.5">
             <span className="h-px w-10" style={{ background: `${GOLD}55` }} />
@@ -164,7 +154,7 @@ function CartePage() {
             className="mt-4 italic leading-snug"
             style={{ fontFamily: SERIF, fontWeight: 300, fontSize: "0.95rem", color: `${CREAM}99` }}
           >
-            Une expérience gastronomique imaginée<br />par la Chef Georgiana Viou.
+            {t.carte_subline}
           </p>
         </header>
 
@@ -183,7 +173,7 @@ function CartePage() {
                 fontFamily: SERIF_SC,
               }}
             >
-              {cat}
+              {catLabels[cat]}
             </button>
           ))}
         </div>
@@ -192,17 +182,17 @@ function CartePage() {
         <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {filtered.map((dish) => {
             const realIdx = DISHES.indexOf(dish);
-            const isSelected = selected.has(realIdx);
+            const isSel = ids.has(realIdx);
             return (
               <article
                 key={realIdx}
                 className="relative rounded-xl border overflow-hidden flex flex-col cursor-pointer transition-all duration-200"
                 style={{
-                  borderColor: isSelected ? GOLD : `${GOLD}18`,
+                  borderColor: isSel ? GOLD : `${GOLD}18`,
                   background: "linear-gradient(180deg, #16110c 0%, #0a0604 100%)",
-                  boxShadow: isSelected ? `0 0 0 1px ${GOLD}40` : "none",
+                  boxShadow: isSel ? `0 0 0 1px ${GOLD}40` : "none",
                 }}
-                onClick={() => toggle(realIdx)}
+                onClick={(e) => openDetail(e, realIdx)}
               >
                 {/* Image */}
                 <div className="relative aspect-square overflow-hidden">
@@ -212,7 +202,6 @@ function CartePage() {
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                   />
-                  {/* Gradient overlay */}
                   <div
                     className="absolute inset-0 pointer-events-none"
                     style={{ background: "linear-gradient(to top, rgba(10,6,4,0.6) 0%, transparent 50%)" }}
@@ -228,23 +217,22 @@ function CartePage() {
                         border: `1px solid ${GOLD}55`,
                       }}
                     >
-                      SIGNATURE
+                      {t.dish_sig}
                     </span>
                   )}
 
-                  {/* Add button */}
                   <button
                     type="button"
                     onClick={(e) => { e.stopPropagation(); toggle(realIdx); }}
                     className="absolute top-2 right-2 w-7 h-7 rounded-full border flex items-center justify-center transition"
                     style={{
-                      borderColor: isSelected ? GOLD : `${GOLD}55`,
-                      background: isSelected ? GOLD : "rgba(10,6,4,0.8)",
-                      color: isSelected ? BG : GOLD,
+                      borderColor: isSel ? GOLD : `${GOLD}55`,
+                      background: isSel ? GOLD : "rgba(10,6,4,0.8)",
+                      color: isSel ? BG : GOLD,
                     }}
-                    aria-label={isSelected ? "Retirer" : "Ajouter"}
+                    aria-label={isSel ? "Retirer" : "Ajouter"}
                   >
-                    {isSelected ? (
+                    {isSel ? (
                       <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                         <path d="M5 12 H 19" />
                       </svg>
@@ -262,13 +250,13 @@ function CartePage() {
                     className="leading-tight"
                     style={{ fontFamily: SERIF, fontSize: "0.92rem", color: CREAM }}
                   >
-                    {dish.name}
+                    {t.dishes[realIdx]?.name ?? dish.name}
                   </h3>
                   <p
                     className="leading-snug flex-1"
                     style={{ fontFamily: SERIF, fontWeight: 300, fontSize: "0.72rem", color: `${MUTED}99` }}
                   >
-                    {dish.desc}
+                    {t.dishes[realIdx]?.desc ?? dish.desc}
                   </p>
                   <div
                     className="pt-2 mt-1 border-t flex items-baseline gap-1"
@@ -323,7 +311,6 @@ function CartePage() {
         style={{ background: "rgba(10,6,4,0.97)", backdropFilter: "blur(12px)", borderColor: `${GOLD}22` }}
       >
         <div className="max-w-2xl mx-auto px-5 py-3 flex items-center gap-3">
-          {/* Bag icon with count */}
           <div
             className="w-9 h-9 rounded-full border flex items-center justify-center shrink-0 relative"
             style={{ borderColor: `${GOLD}45`, color: GOLD }}
@@ -332,48 +319,242 @@ function CartePage() {
               <path d="M6 7 H 18 L 17 20 H 7 Z" />
               <path d="M9 7 V 5 A 3 3 0 0 1 15 5 V 7" />
             </svg>
-            {selected.size > 0 && (
+            {ids.size > 0 && (
               <span
                 className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-[0.55rem]"
                 style={{ background: GOLD, color: BG, fontFamily: SERIF_SC }}
               >
-                {selected.size}
+                {ids.size}
               </span>
             )}
           </div>
 
-          {/* Count + total */}
           <div className="flex-1 flex items-center gap-3" style={{ fontFamily: SERIF }}>
             <span className="text-[0.72rem]" style={{ color: CREAM }}>
-              <span style={{ color: GOLD }}>{selected.size}</span>{" "}
-              {selected.size === 1 ? "PLAT" : "PLATS"}
+              <span style={{ color: GOLD }}>{ids.size}</span>{" "}
+              {ids.size === 1 ? t.plat_singular : t.plat_plural}
             </span>
             <span className="text-[0.65rem] tracking-[0.2em]" style={{ color: `${MUTED}60`, fontFamily: SERIF_SC }}>
-              TOTAL
+              {t.total}
             </span>
             <span className="text-[0.82rem]" style={{ color: CREAM }}>
               {total.toLocaleString("fr-FR")} XOF
             </span>
           </div>
 
-          {/* CTA */}
           <button
             type="button"
-            disabled={selected.size === 0}
+            disabled={ids.size === 0}
+            onClick={handleGoSelection}
             className="px-5 h-10 rounded-full flex items-center gap-2 text-[0.72rem] tracking-[0.14em] shrink-0 transition disabled:opacity-40"
             style={{
-              background: selected.size > 0 ? `linear-gradient(135deg, #d4b878 0%, #b8954c 100%)` : `${GOLD}30`,
-              color: selected.size > 0 ? BG : GOLD,
+              background: ids.size > 0 ? `linear-gradient(135deg, #d4b878 0%, #b8954c 100%)` : `${GOLD}30`,
+              color: ids.size > 0 ? BG : GOLD,
               fontFamily: SERIF_SC,
             }}
           >
-            MA SÉLECTION
+            {t.ma_selection}
             <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 6 L 15 12 L 9 18" />
             </svg>
           </button>
         </div>
       </div>
+
+      {/* ── DISH DETAIL OVERLAY ── */}
+      {selectedDishIdx !== null && dish && (
+        <div
+          className="fixed inset-0 z-50 overflow-hidden"
+          style={{
+            background: BG,
+            transformOrigin: overlayOrigin,
+            animation: `${isClosingOverlay ? "exitShrink" : "enterGrow"} 0.52s ${EASE} both`,
+          }}
+          onAnimationEnd={handleOverlayAnimEnd}
+        >
+          {/* Hero image — top 54% */}
+          <div className="absolute top-0 left-0 right-0 overflow-hidden" style={{ height: "54%" }}>
+            <img
+              src={dish.image}
+              alt={tr?.name ?? dish.name}
+              className="w-full h-full object-cover"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(to top, #0a0604 4%, rgba(10,6,4,.1) 45%, rgba(10,6,4,.45))" }}
+            />
+            {dish.signature && (
+              <span
+                className="absolute px-[9px] py-1 rounded"
+                style={{
+                  top: "54px",
+                  right: "22px",
+                  fontFamily: SERIF_SC,
+                  fontSize: "8px",
+                  letterSpacing: ".24em",
+                  color: GOLD,
+                  background: "rgba(10,6,4,.7)",
+                  border: `1px solid ${GOLD}8C`,
+                }}
+              >
+                {t.dish_sig}
+              </span>
+            )}
+          </div>
+
+          {/* Back button */}
+          <button
+            type="button"
+            onClick={closeDetail}
+            className="absolute flex items-center justify-center rounded-full border backdrop-blur-sm transition"
+            style={{
+              top: "42px",
+              left: "22px",
+              width: "34px",
+              height: "34px",
+              borderColor: "rgba(201,169,106,.5)",
+              background: "rgba(8,5,3,.4)",
+              color: CREAM,
+              zIndex: 25,
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(201,169,106,.18)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(8,5,3,.4)")}
+            aria-label={t.back}
+          >
+            <svg viewBox="0 0 24 24" className="w-[14px] h-[14px]" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 6 L 9 12 L 15 18" />
+            </svg>
+          </button>
+
+          {/* Text content — bottom half */}
+          <div
+            className="absolute flex flex-col"
+            style={{ left: "28px", right: "28px", top: "48%", bottom: "28px", zIndex: 10 }}
+          >
+            {/* Category */}
+            <div
+              style={{
+                fontFamily: SERIF_SC,
+                fontSize: "9px",
+                letterSpacing: ".32em",
+                color: GOLD,
+                animation: `lamTextUp .7s ${EASE} .18s both`,
+              }}
+            >
+              {dish.category}
+            </div>
+
+            {/* Dish name */}
+            <h2
+              style={{
+                fontFamily: SERIF,
+                fontWeight: 500,
+                fontSize: "clamp(1.8rem, 7vw, 2.2rem)",
+                lineHeight: 1.05,
+                color: "#f3ead8",
+                margin: "8px 0 0",
+                animation: `lamTextUp .7s ${EASE} .27s both`,
+              }}
+            >
+              {tr?.name ?? dish.name}
+            </h2>
+
+            {/* Divider */}
+            <div
+              className="flex items-center gap-[10px] my-[14px]"
+              style={{ animation: `lamTextUp .7s ${EASE} .35s both` }}
+            >
+              <span className="h-px w-[34px]" style={{ background: `${GOLD}80` }} />
+              <span style={{ color: GOLD, fontSize: "9px" }}>✦</span>
+            </div>
+
+            {/* Description */}
+            <p
+              className="leading-relaxed"
+              style={{
+                fontFamily: SERIF,
+                fontWeight: 300,
+                fontSize: "15px",
+                lineHeight: 1.6,
+                color: "rgba(233,220,196,.8)",
+                margin: 0,
+                animation: `lamTextUp .7s ${EASE} .43s both`,
+              }}
+            >
+              {tr?.longDesc ?? dish.desc}
+            </p>
+
+            {/* Ingredient */}
+            <div
+              className="mt-[18px]"
+              style={{ animation: `lamTextUp .7s ${EASE} .51s both` }}
+            >
+              <span
+                style={{
+                  fontFamily: SERIF_SC,
+                  fontSize: "8px",
+                  letterSpacing: ".3em",
+                  color: "rgba(201,169,106,.8)",
+                }}
+              >
+                {t.detail_product}
+              </span>
+              <div
+                className="italic mt-[3px]"
+                style={{ fontFamily: SERIF, fontSize: "17px", color: GOLD }}
+              >
+                {tr?.ing ?? ""}
+              </div>
+            </div>
+
+            {/* Price + CTA */}
+            <div
+              className="mt-auto flex items-center gap-[14px] pt-[18px]"
+              style={{ animation: `lamTextUp .7s ${EASE} .59s both` }}
+            >
+              <div className="flex flex-col">
+                <span
+                  style={{
+                    fontFamily: SERIF_SC,
+                    fontSize: "7px",
+                    letterSpacing: ".24em",
+                    color: "rgba(201,184,150,.5)",
+                  }}
+                >
+                  PRIX
+                </span>
+                <span
+                  className="leading-tight"
+                  style={{ fontFamily: SERIF, fontSize: "24px", color: CREAM, lineHeight: 1.1 }}
+                >
+                  {dish.price}{" "}
+                  <span style={{ fontSize: "12px", color: "rgba(201,184,150,.6)" }}>XOF</span>
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => toggle(selectedDishIdx)}
+                className="flex-1 h-[48px] rounded-full flex items-center justify-center gap-2 transition"
+                style={{
+                  fontFamily: SERIF_SC,
+                  fontSize: "10px",
+                  letterSpacing: ".18em",
+                  cursor: "pointer",
+                  border: `1px solid ${GOLD}`,
+                  background: isSelected
+                    ? "transparent"
+                    : "linear-gradient(135deg, #d4b878, #b8954c)",
+                  color: isSelected ? GOLD : BG,
+                  transition: `all .3s ${EASE}`,
+                }}
+              >
+                {isSelected ? t.detail_added : t.detail_add}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

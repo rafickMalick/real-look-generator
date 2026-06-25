@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; }
+  @keyframes lamTextUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes lamSlideInUp { from { transform: translateY(104%); } to { transform: translateY(0); } }
+  @keyframes lamSlideOutUp { from { transform: translateY(0); } to { transform: translateY(-104%); } }
+  @keyframes lamSlideInDown { from { transform: translateY(-104%); } to { transform: translateY(0); } }
+  @keyframes lamSlideOutDown { from { transform: translateY(0); } to { transform: translateY(104%); } }
+  @keyframes lamLoad { 0% { width: 8%; } 100% { width: 100%; } }
+  @keyframes lamGlowPulse { 0%,100% { opacity: .5; } 50% { opacity: .9; } }
+</style>
+</helmet>
+
+<!-- ════════════════ TITLE ════════════════ -->
+<div data-drags-parent="1" style="position:absolute;left:80px;top:60px;width:1400px">
+  <div style="font-family:'Cormorant SC',serif;font-size:11px;letter-spacing:.32em;color:rgba(45,38,30,.6)">L'AMI · SOFITEL BÉNIN — MENU DIGITAL · PARCOURS COMPLET</div>
+  <div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;letter-spacing:.01em;color:rgba(28,22,16,.92);margin-top:4px">Chargement → Choix → Menus signature / L'expérience · ou Composer sa carte</div>
+</div>
+
+<!-- ════════════════ 01 · CHARGEMENT ════════════════ -->
+<div style="position:absolute;left:80px;top:160px;width:360px">
+  <div data-drags-parent="1" style="position:absolute;top:-26px;left:2px;font:600 12px system-ui;letter-spacing:.04em;color:rgba(45,38,30,.78)">01 · Chargement</div>
+  <div data-screen-label="Chargement" style="position:relative;width:360px;height:740px;border-radius:46px;background:#080503;border:9px solid #17120c;box-shadow:0 44px 80px -34px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,106,.06);overflow:hidden">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:108px;height:22px;background:#17120c;border-radius:0 0 14px 14px;z-index:30"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 120% 80% at 50% 0%, #1e1610 0%, #0f0b08 45%, #080604 100%)"></div>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:54px 26px 30px">
+      <svg viewBox="0 0 40 50" width="22" height="28" fill="none" stroke="#c9a96a" stroke-width="1" stroke-linecap="round" style="margin-bottom:10px"><path d="M20 4 C 22 14, 28 20, 30 30 C 28 40, 22 44, 20 48 C 18 44, 12 40, 10 30 C 12 20, 18 14, 20 4 Z"></path><path d="M20 6 L20 46"></path><path d="M20 14 C 16 16, 14 20, 13 24"></path><path d="M20 14 C 24 16, 26 20, 27 24"></path><path d="M20 24 C 16 26, 14 30, 13 34"></path><path d="M20 24 C 24 26, 26 30, 27 34"></path></svg>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:54px;letter-spacing:.12em;color:#e9dcc4;line-height:.95;margin:0">L'AMI</h1>
+      <div style="font-family:'Cormorant SC',serif;font-size:9px;letter-spacing:.45em;color:#c9b896;margin-top:8px">SOFITEL BÉNIN</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:#e9dcc4;text-align:center;line-height:1.4;margin:26px 0 0">La cuisine d'une femme,<br>le goût d'un territoire.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:16px 0"><span style="height:1px;width:44px;background:rgba(201,169,106,.35)"></span><span style="color:#c9a96a;font-size:9px">✦</span><span style="height:1px;width:44px;background:rgba(201,169,106,.35)"></span></div>
+      <div style="font-family:'Cormorant SC',serif;font-size:9px;letter-spacing:.35em;color:#c9a96a">UN VOYAGE EN 4 ACTES</div>
+      <div style="width:100%;max-width:280px;margin-top:18px;border-radius:8px;overflow:hidden;border:1px solid rgba(201,169,106,.14)"><img src="src/assets/splash-hero.png" style="width:100%;height:auto;display:block"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:13px;color:rgba(233,220,196,.9);text-align:center;line-height:1.5;margin:16px 0 0;padding:0 6px">« Je m'inspire du terroir Béninois pour sublimer la tradition française. »</p>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(201,169,106,.85);margin-top:8px">— Georgiana, Cheffe de L'Ami</div>
+      <div style="margin-top:auto;width:100%;display:flex;flex-direction:column;align-items:center">
+        <div style="font-family:'Cormorant SC',serif;font-size:8px;letter-spacing:.35em;color:#c9b896">PRÉPARATION DU VOYAGE…</div>
+        <div style="margin-top:14px;width:86%;position:relative;height:8px">
+          <div style="position:absolute;top:3px;left:0;right:0;height:1px;background:#2a2018"></div>
+          <div style="position:absolute;top:3px;left:0;height:1px;width:8%;background:linear-gradient(90deg,transparent,#c9a96a 30%,#f0d9a0 70%,#c9a96a);animation:lamLoad 5.5s ease-in-out infinite alternate">
+            <div style="position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:#f0e4cc;box-shadow:0 0 6px #c9a96a,0 0 14px rgba(201,169,106,.5)"></div>
+          </div>
+        </div>
+        <svg viewBox="0 0 64 64" width="30" height="30" fill="none" stroke="#c9a96a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-top:18px;opacity:.9"><path d="M20 36 C 14 36, 12 30, 14 26 C 12 20, 16 14, 22 16 C 24 12, 30 10, 32 14 C 34 10, 40 12, 42 16 C 48 14, 52 20, 50 26 C 52 30, 50 36, 44 36 Z"></path><path d="M20 36 V 48 H 44 V 36"></path><path d="M20 42 H 44"></path></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ 02 · CHOIX ════════════════ -->
+<div style="position:absolute;left:520px;top:160px;width:360px">
+  <div data-drags-parent="1" style="position:absolute;top:-26px;left:2px;font:600 12px system-ui;letter-spacing:.04em;color:rgba(45,38,30,.78)">02 · Choix de l'expérience</div>
+  <div data-screen-label="Choix" style="position:relative;width:360px;height:740px;border-radius:46px;background:#080503;border:9px solid #17120c;box-shadow:0 44px 80px -34px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,106,.06);overflow:hidden">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:108px;height:22px;background:#17120c;border-radius:0 0 14px 14px;z-index:30"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center top, #1f1610 0%, #120c08 60%, #0a0604 100%)"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;height:34%;background:linear-gradient(180deg,transparent,rgba(10,6,4,.88) 70%,#0a0604),url(src/assets/dish-agneau.jpg);background-size:cover;background-position:center;opacity:.32"></div>
+    <div style="position:absolute;top:42px;right:22px;z-index:20;display:flex;align-items:center;gap:5px;padding:0 11px;height:30px;border-radius:7px;border:1px solid rgba(201,169,106,.4);color:#e9dcc4;font-family:'Cormorant Garamond',serif;font-size:13px">FR <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 L 12 15 L 18 9"></path></svg></div>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:54px 26px 30px">
+      <svg viewBox="0 0 40 50" width="22" height="28" fill="none" stroke="#c9a96a" stroke-width="1" stroke-linecap="round" style="margin-bottom:10px"><path d="M20 4 C 22 14, 28 20, 30 30 C 28 40, 22 44, 20 48 C 18 44, 12 40, 10 30 C 12 20, 18 14, 20 4 Z"></path><path d="M20 6 L20 46"></path><path d="M20 14 C 16 16, 14 20, 13 24"></path><path d="M20 14 C 24 16, 26 20, 27 24"></path><path d="M20 24 C 16 26, 14 30, 13 34"></path><path d="M20 24 C 24 26, 26 30, 27 34"></path></svg>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:44px;letter-spacing:.18em;color:#e9dcc4;line-height:.95;margin:0">L'AMI</h1>
+      <div style="font-family:'Cormorant SC',serif;font-size:8px;letter-spacing:.45em;color:#c9b896;margin-top:8px">SOFITEL BÉNIN</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:26px;letter-spacing:.3em;color:#e9dcc4;margin:38px 0 0">BIENVENUE</h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:15px;color:#c9b896;text-align:center;line-height:1.5;margin:12px 0 0">Comment souhaitez-vous<br>vivre votre expérience ?</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:24px 0"><span style="height:1px;width:40px;background:rgba(201,169,106,.3)"></span><svg viewBox="0 0 40 50" width="11" height="14" fill="none" stroke="#c9a96a" stroke-width="1.2" stroke-linecap="round"><path d="M20 4 C 22 14, 28 20, 30 30 C 28 40, 22 44, 20 48 C 18 44, 12 40, 10 30 C 12 20, 18 14, 20 4 Z"></path><path d="M20 6 L20 46"></path></svg><span style="height:1px;width:40px;background:rgba(201,169,106,.3)"></span></div>
+      <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="position:relative;border-radius:4px;border:1px solid rgba(201,169,106,.4);padding:24px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;background:linear-gradient(180deg,rgba(30,22,16,.7),rgba(18,13,9,.85));box-shadow:inset 0 0 40px rgba(0,0,0,.5);cursor:pointer;transition:border-color .4s" style-hover="border-color:rgba(201,169,106,.85)">
+          <div style="width:60px;height:60px;border-radius:50%;border:1px solid rgba(201,169,106,.6);display:flex;align-items:center;justify-content:center;color:#c9a96a;margin-bottom:18px"><svg viewBox="0 0 64 64" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 32 H50 L44 50 C 43 53, 41 54, 39 54 H25 C 23 54, 21 53, 20 50 Z"></path><path d="M12 32 H52"></path><path d="M38 32 L46 14"></path><circle cx="46" cy="13" r="2.5"></circle><path d="M28 32 C 28 24, 24 20, 22 18"></path><path d="M28 32 C 28 24, 32 20, 34 18"></path></svg></div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:17px;letter-spacing:.08em;color:#e9dcc4;line-height:1.15;margin:0">COMPOSER<br>MON MENU</h3>
+          <span style="height:1px;width:34px;background:rgba(201,169,106,.5);margin:14px 0"></span>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:12px;line-height:1.4;color:rgba(201,184,150,.9);margin:0">Sélectionnez vos plats préférés.</p>
+          <span style="font-family:'Cormorant Garamond',serif;color:#c9a96a;font-size:22px;margin-top:16px">‹</span>
+        </div>
+        <div style="position:relative;border-radius:4px;border:1px solid rgba(201,169,106,.4);padding:24px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;background:linear-gradient(180deg,rgba(30,22,16,.7),rgba(18,13,9,.85));box-shadow:inset 0 0 40px rgba(0,0,0,.5);cursor:pointer;transition:border-color .4s" style-hover="border-color:rgba(201,169,106,.85)">
+          <div style="width:60px;height:60px;border-radius:50%;border:1px solid rgba(201,169,106,.6);display:flex;align-items:center;justify-content:center;color:#c9a96a;margin-bottom:18px"><svg viewBox="0 0 64 64" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 44 H52"></path><path d="M14 44 C 14 32, 22 22, 32 22 C 42 22, 50 32, 50 44"></path><circle cx="32" cy="20" r="2"></circle><path d="M10 48 H54"></path></svg></div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:17px;letter-spacing:.08em;color:#e9dcc4;line-height:1.15;margin:0">FAIRE CONFIANCE<br>À LA CHEFFE</h3>
+          <span style="height:1px;width:34px;background:rgba(201,169,106,.5);margin:14px 0"></span>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:12px;line-height:1.4;color:rgba(201,184,150,.9);margin:0">Découvrez ses menus signature.</p>
+          <span style="font-family:'Cormorant Garamond',serif;color:#c9a96a;font-size:22px;margin-top:16px">›</span>
+        </div>
+      </div>
+      <blockquote style="margin:auto 0 0;text-align:center">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(233,220,196,.9);line-height:1.5;margin:0">« Chaque plat est une rencontre.<br>Chaque repas, une histoire. »</p>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(201,169,106,.9);margin-top:8px">— Georgiana, Cheffe de L'Ami</div>
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ 03 · SÉLECTION DES MENUS ════════════════ -->
+<div style="position:absolute;left:960px;top:160px;width:360px">
+  <div data-drags-parent="1" style="position:absolute;top:-26px;left:2px;font:600 12px system-ui;letter-spacing:.04em;color:rgba(45,38,30,.78)">03a · Faire confiance — Sélection des menus</div>
+  <div data-screen-label="Menus" style="position:relative;width:360px;height:740px;border-radius:46px;background:#080503;border:9px solid #17120c;box-shadow:0 44px 80px -34px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,106,.06);overflow:hidden">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:108px;height:22px;background:#17120c;border-radius:0 0 14px 14px;z-index:30"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(120% 60% at 50% 0%, rgba(201,169,106,.10), transparent 60%),#0c0907"></div>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding-top:46px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0">
+        <span style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;letter-spacing:.16em;color:#c9a96a;line-height:1">L'AMI</span>
+        <span style="font-family:'Cormorant SC',serif;font-size:8px;letter-spacing:.42em;color:#c9b896">SOFITEL BÉNIN</span>
+      </div>
+      <div style="text-align:center;margin-top:26px;padding:0 30px;flex-shrink:0">
+        <div style="font-family:'Cormorant SC',serif;font-size:9px;letter-spacing:.34em;color:rgba(201,169,106,.85)">LA CARTE DES MENUS</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:38px;color:#e9dcc4;letter-spacing:.02em;margin:8px 0 0">Nos Voyages</h2>
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:14.5px;color:rgba(233,220,196,.6);margin:6px 0 0">Choisissez votre destination</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px"><span style="height:1px;width:40px;background:rgba(201,169,106,.5)"></span><span style="color:#c9a96a;font-size:9px">✦</span><span style="height:1px;width:40px;background:rgba(201,169,106,.5)"></span></div>
+      </div>
+      <div style="margin-top:14px;display:flex;flex-direction:column;flex:1;overflow-y:auto;min-height:0">
+        <sc-for list="{{ menus }}" as="m" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:15px;padding:15px 24px;border-top:1px solid rgba(201,169,106,.13);cursor:pointer;transition:background .4s;flex-shrink:0" style-hover="background:rgba(201,169,106,.05)">
+            <div style="width:52px;height:52px;border-radius:50%;overflow:hidden;border:1px solid rgba(201,169,106,.3);flex-shrink:0"><img src="{{ m.img }}" style="width:100%;height:100%;object-fit:cover"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:19px;letter-spacing:.05em;color:#e9dcc4">{{ m.name }}</div>
+              <div style="font-family:'Cormorant SC',serif;font-size:8px;letter-spacing:.28em;color:#c9a96a;margin-top:2px">{{ m.steps }}</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:12.5px;color:rgba(233,220,196,.58);margin-top:3px">{{ m.desc }}</div>
+            </div>
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#c9a96a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M9 6 L15 12 L9 18"></path></svg>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto;padding:18px 30px 30px;text-align:center;flex-shrink:0">
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px"><span style="height:1px;width:46px;background:rgba(201,169,106,.4)"></span><span style="color:#c9a96a;font-size:11px">✦</span><span style="height:1px;width:46px;background:rgba(201,169,106,.4)"></span></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:14px;color:rgba(233,220,196,.62);line-height:1.5;margin:0">« Chaque plat est une rencontre,<br>chaque repas une histoire. »</p>
+        <p style="font-family:'Cormorant SC',serif;font-size:8px;letter-spacing:.3em;color:rgba(201,169,106,.75);margin:9px 0 0">GEORGIANA VIOU</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ 04 · L'EXPÉRIENCE ════════════════ -->
+<div style="position:absolute;left:1400px;top:160px;width:360px">
+  <div data-drags-parent="1" style="position:absolute;top:-26px;left:2px;font:600 12px system-ui;letter-spacing:.04em;color:rgba(45,38,30,.78)">03b · L'expérience (Actes) — photo glissée</div>
+  <div data-screen-label="Experience" style="position:relative;width:360px;height:740px;border-radius:46px;background:#080503;border:9px solid #17120c;box-shadow:0 44px 80px -34px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,106,.06);overflow:hidden">
+    <div style="position:absolute;inset:0;overflow:hidden">{{ bStage }}</div>
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:108px;height:22px;background:#17120c;border-radius:0 0 14px 14px;z-index:30"></div>
+    <div style="position:absolute;top:42px;left:22px;z-index:25;width:34px;height:34px;border-radius:50%;border:1px solid rgba(201,169,106,.5);background:rgba(8,5,3,.4);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;color:#e9dcc4;cursor:pointer" style-hover="background:rgba(201,169,106,.18)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6 L 9 12 L 15 18"></path></svg></div>
+    <div style="position:absolute;top:46px;left:0;right:0;z-index:20;display:flex;flex-direction:column;align-items:center;gap:1px;pointer-events:none">
+      <span style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:21px;letter-spacing:.16em;color:#f3ead8;line-height:1;text-shadow:0 2px 16px rgba(0,0,0,.8)">L'AMI</span>
+      <span style="font-family:'Cormorant SC',serif;font-size:7px;letter-spacing:.42em;color:rgba(233,220,196,.8);text-shadow:0 2px 12px rgba(0,0,0,.8)">SOFITEL BÉNIN</span>
+    </div>
+    <div style="position:absolute;top:44px;right:22px;z-index:20;font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.08em;color:rgba(233,220,196,.85);text-shadow:0 2px 10px rgba(0,0,0,.8)">{{ bNum }} <span style="color:rgba(201,169,106,.7)">/ {{ total }}</span></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:20;background:linear-gradient(to top, rgba(8,5,3,.92), rgba(8,5,3,0));padding:24px 18px 14px;display:flex;justify-content:space-between">
+      <sc-for list="{{ bDots }}" as="d" hint-placeholder-count="4">
+        <button onClick="{{ d.onClick }}" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;flex:1;padding:0"><span style="{{ d.circleStyle }}">{{ d.num }}</span><span style="{{ d.labelStyle }}">{{ d.step }}</span></button>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ 05 · COMPOSER SA CARTE ════════════════ -->
+<div style="position:absolute;left:1840px;top:160px;width:360px">
+  <div data-drags-parent="1" style="position:absolute;top:-26px;left:2px;font:600 12px system-ui;letter-spacing:.04em;color:rgba(45,38,30,.78)">04 · Composer mon menu — La Carte</div>
+  <div data-screen-label="Composer" style="position:relative;width:360px;height:740px;border-radius:46px;background:#080503;border:9px solid #17120c;box-shadow:0 44px 80px -34px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,106,.06);overflow:hidden">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:108px;height:22px;background:#17120c;border-radius:0 0 14px 14px;z-index:30"></div>
+    <div style="position:absolute;inset:0;background:#0a0604"></div>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding-top:46px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0">
+        <div style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(201,169,106,.45);display:flex;align-items:center;justify-content:center;color:#c9a96a"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6 L 9 12 L 15 18"></path></svg></div>
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <span style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:24px;letter-spacing:.16em;color:#e9dcc4;line-height:1">L'AMI</span>
+          <span style="font-family:'Cormorant SC',serif;font-size:6.5px;letter-spacing:.4em;color:#c9b896;margin-top:2px">SOFITEL BÉNIN</span>
+        </div>
+        <div style="width:34px;height:34px"></div>
+      </div>
+      <div style="text-align:center;margin-top:18px;flex-shrink:0">
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;letter-spacing:.14em;color:#e9dcc4;margin:0">NOTRE CARTE</h1>
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px"><span style="height:1px;width:34px;background:rgba(201,169,106,.5)"></span><span style="color:#c9a96a;font-size:9px">✦</span><span style="height:1px;width:34px;background:rgba(201,169,106,.5)"></span></div>
+        <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:12px;color:rgba(233,220,196,.6);margin:10px 0 0">Une expérience imaginée<br>par la Cheffe Georgiana Viou.</p>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:8px;overflow-x:auto;padding:0 22px 2px;flex-shrink:0">
+        <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
+          <div style="{{ c.chipStyle }}" onClick="{{ c.onClick }}">{{ c.label }}</div>
+        </sc-for>
+      </div>
+      <div style="flex:1;overflow-y:auto;min-height:0;padding:14px 22px 96px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <sc-for list="{{ dishCards }}" as="d" hint-placeholder-count="4">
+            <div style="{{ d.cardStyle }}" onClick="{{ d.onToggle }}">
+              <div style="position:relative;width:100%;aspect-ratio:1/1;overflow:hidden">
+                <img src="{{ d.image }}" style="width:100%;height:100%;object-fit:cover">
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,4,.6),transparent 50%)"></div>
+                <sc-if value="{{ d.signature }}" hint-placeholder-val="{{ true }}">
+                  <span style="position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:3px;font-family:'Cormorant SC',serif;font-size:6.5px;letter-spacing:.2em;color:#c9a96a;background:rgba(10,6,4,.85);border:1px solid rgba(201,169,106,.55)">SIGNATURE</span>
+                </sc-if>
+                <div style="{{ d.addStyle }}">{{ d.addSymbol }}</div>
+              </div>
+              <div style="padding:10px;display:flex;flex-direction:column;gap:5px;flex:1">
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:14px;color:#e9dcc4;line-height:1.1;margin:0">{{ d.name }}</h3>
+                <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:10.5px;line-height:1.35;color:rgba(201,184,150,.6);margin:0;flex:1">{{ d.desc }}</p>
+                <div style="padding-top:7px;border-top:1px solid rgba(201,169,106,.18);display:flex;align-items:baseline;gap:4px">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#e9dcc4">{{ d.price }}</span>
+                  <span style="font-family:'Cormorant SC',serif;font-size:7px;letter-spacing:.2em;color:rgba(201,184,150,.5)">XOF</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:20;border-top:1px solid rgba(201,169,106,.22);background:rgba(10,6,4,.97);backdrop-filter:blur(12px);padding:12px 16px;display:flex;align-items:center;gap:10px">
+      <div style="position:relative;width:34px;height:34px;border-radius:50%;border:1px solid rgba(201,169,106,.45);display:flex;align-items:center;justify-content:center;color:#c9a96a;flex-shrink:0">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7 H 18 L 17 20 H 7 Z"></path><path d="M9 7 V 5 A 3 3 0 0 1 15 5 V 7"></path></svg>
+        <sc-if value="{{ carteHasSel }}" hint-placeholder-val="{{ true }}">
+          <span style="position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:#c9a96a;color:#0a0604;font-family:'Cormorant SC',serif;font-size:9px;display:flex;align-items:center;justify-content:center">{{ carteCount }}</span>
+        </sc-if>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;gap:9px;font-family:'Cormorant Garamond',serif">
+        <span style="font-size:12px;color:#e9dcc4"><span style="color:#c9a96a">{{ carteCount }}</span> {{ cartePlatLabel }}</span>
+        <span style="font-size:8px;letter-spacing:.2em;color:rgba(201,184,150,.5);font-family:'Cormorant SC',serif">TOTAL</span>
+        <span style="font-size:13px;color:#e9dcc4">{{ carteTotal }}</span>
+      </div>
+      <div style="{{ ctaStyle }}">MA SÉLECTION <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 L 15 12 L 9 18"></path></svg></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { b: 0, bPrev: null, bDir: 1, cat: 'TOUS', sel: {} };
+
+  acts() {
+    return [
+      { num:'I',   label:'ACTE I',   step:'AMUSE-BOUCHE', t1:'LA BRUME',  t2:'DE MAÏS',         desc:'La première brume se lève sur les rives du Mono.',          img:'src/assets/dish-acte1.jpg',     ing:'Maïs du Ouémé' },
+      { num:'II',  label:'ACTE II',  step:'ENTRÉE',       t1:'CARPACCIO', t2:'DE GAMBAS',       desc:'Les saveurs marines dansent avec les agrumes du terroir.',  img:'src/assets/dish-carpaccio.jpg', ing:'Gambas du Golfe' },
+      { num:'III', label:'ACTE III', step:'PLAT',         t1:'AGNEAU',    t2:'DU TERROIR',      desc:'L’agneau cuit lentement dans les épices du pays.',          img:'src/assets/dish-agneau.jpg',    ing:'Agneau local' },
+      { num:'IV',  label:'ACTE IV',  step:'DOUCEUR',      t1:'CHOCOLAT',  t2:'& FÈVE DE TONKA', desc:'La douceur finale, un voyage dans le terroir du cacao.',    img:'src/assets/dish-chocolat.jpg',  ing:'Fève de tonka' },
+    ];
+  }
+
+  menus() {
+    return [
+      { name:'DÉCOUVERTE', steps:'EN QUATRE ACTES', desc:'Une immersion délicate en quatre temps.',       img:'src/assets/dish-acte1.jpg' },
+      { name:'DÉGUSTATION', steps:'EN SEPT ACTES',  desc:'Le grand voyage gastronomique de la Cheffe.',   img:'src/assets/dish-agneau.jpg' },
+      { name:'VÉGÉTARIEN', steps:'EN CINQ ACTES',   desc:'La nature béninoise sublimée, acte après acte.', img:'src/assets/dish-carpaccio.jpg' },
+    ];
+  }
+
+  dishesData() {
+    return [
+      { name:'Carpaccio de gambas', desc:'Agrumes du Bénin, mangue verte, huile de gingembre.', price:'12 000', cat:'ENTRÉES', image:'src/assets/dish-carpaccio.jpg', signature:false },
+      { name:'Le Filet des Rives du Mono', desc:'Maïs fumé, légumes de saison, émulsion au beurre noisette.', price:'24 000', cat:'PLATS', image:'src/assets/dish-acte1.jpg', signature:true },
+      { name:'Agneau du terroir', desc:'Cuit lentement, jus corsé au djon djon, légumes rôtis.', price:'22 000', cat:'PLATS', image:'src/assets/dish-agneau.jpg', signature:false },
+      { name:'Chocolat & fève de tonka', desc:'Crémeux chocolat noir, croustillant praliné, glace fève de tonka.', price:'9 000', cat:'DESSERTS', image:'src/assets/dish-chocolat.jpg', signature:false },
+    ];
+  }
+
+  goB(i, force) {
+    const cur = this.state.b;
+    if (i === cur) return;
+    const d = force || (i > cur ? 1 : -1);
+    clearTimeout(this._bt);
+    this.setState({ bPrev: cur, b: i, bDir: d });
+    this._bt = setTimeout(() => this.setState({ bPrev: null }), 1000);
+  }
+  nextB() { const n = this.acts().length; this.goB((this.state.b + 1) % n, 1); }
+  pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  toggleSel(i) {
+    this.setState(s => {
+      const sel = Object.assign({}, s.sel);
+      if (sel[i]) delete sel[i]; else sel[i] = true;
+      return { sel };
+    });
+  }
+
+  dots() {
+    const gold = '#c9a96a', cur = this.state.b;
+    return this.acts().map((a, i) => {
+      const on = i === cur;
+      return {
+        num: a.num, step: a.step, onClick: () => this.goB(i),
+        circleStyle: { width:'34px', height:'34px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', border:'1px solid ' + (on ? gold : 'rgba(201,169,106,.22)'), background: on ? 'rgba(201,169,106,.12)' : 'transparent', color: on ? gold : 'rgba(201,169,106,.4)', fontFamily:"'Cormorant Garamond',serif", fontSize:'15px', transform: on ? 'scale(1.08)' : 'scale(1)', boxShadow: on ? '0 0 16px rgba(201,169,106,.2)' : 'none', transition:'all .6s cubic-bezier(.4,0,.2,1)' },
+        labelStyle: { fontFamily:"'Cormorant SC',serif", fontSize:'7px', letterSpacing:'.12em', marginTop:'6px', color: on ? 'rgba(201,169,106,.85)' : 'rgba(201,169,106,.3)', transition:'color .6s' }
+      };
+    });
+  }
+
+  stageB() {
+    const e = React.createElement, gold = '#c9a96a', cream = '#e9dcc4';
+    const A = this.acts(), cur = this.state.b, prev = this.state.bPrev, dir = this.state.bDir || 1;
+    const b = A[cur];
+    const imgStyle = { position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover' };
+    const enterAnim = dir > 0 ? 'lamSlideInUp' : 'lamSlideInDown';
+    const exitAnim = dir > 0 ? 'lamSlideOutUp' : 'lamSlideOutDown';
+    const layers = [];
+    if (prev != null) layers.push(e('img', { key:'p'+prev, src:A[prev].img, style:Object.assign({}, imgStyle, { animation:exitAnim+' .9s cubic-bezier(.5,0,.15,1) both', zIndex:1 }) }));
+    layers.push(e('img', { key:'d'+cur, src:b.img, style:Object.assign({}, imgStyle, { animation: prev != null ? enterAnim+' .9s cubic-bezier(.5,0,.15,1) both' : 'none', zIndex:2 }) }));
+    return e('div', { key:'bstage', style:{ position:'absolute', inset:0 } },
+      layers,
+      e('div', { style:{ position:'absolute', inset:0, zIndex:3, background:'linear-gradient(180deg, rgba(12,9,7,.62) 0%, rgba(12,9,7,0) 28%, rgba(12,9,7,.18) 48%, rgba(12,9,7,.94) 86%)' } }),
+      e('div', { key:'bt'+cur, style:{ position:'absolute', left:'26px', right:'26px', bottom:'104px', zIndex:4, animation:'lamTextUp .9s ease .1s both' } },
+        e('div', { style:{ display:'flex', alignItems:'center', gap:'10px', marginBottom:'12px' } },
+          e('span', { style:{ fontFamily:"'Cormorant SC',serif", color:gold, fontSize:'10.5px', letterSpacing:'.38em' } }, b.label),
+          e('span', { style:{ height:'1px', flex:1, maxWidth:'44px', background:gold+'55' } })
+        ),
+        e('h1', { style:{ fontFamily:"'Cormorant Garamond',serif", fontWeight:500, color:'#fff', fontSize:'40px', lineHeight:.94, textTransform:'uppercase', letterSpacing:'.01em', margin:0 } }, b.t1, e('br'), b.t2),
+        e('p', { style:{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontStyle:'italic', color:cream+'cc', fontSize:'14.5px', lineHeight:1.5, margin:'14px 0 0', maxWidth:'260px' } }, b.desc),
+        e('div', { style:{ display:'flex', alignItems:'center', gap:'9px', marginTop:'18px' } },
+          e('span', { style:{ width:'5px', height:'5px', borderRadius:'50%', background:gold } }),
+          e('span', { style:{ fontFamily:"'Cormorant SC',serif", color:gold, fontSize:'10px', letterSpacing:'.26em' } }, b.ing)
+        )
+      )
+    );
+  }
+
+  carteVals() {
+    const gold = '#c9a96a', cream = '#e9dcc4', muted = '#c9b896', bg = '#0a0604';
+    const cats = ['TOUS', 'ENTRÉES', 'PLATS', 'DESSERTS', 'BOISSONS'];
+    const active = this.state.cat;
+    const sel = this.state.sel || {};
+    const D = this.dishesData();
+    const catChips = cats.map(c => {
+      const on = c === active;
+      return {
+        label: c, onClick: () => this.setState({ cat: c }),
+        chipStyle: { flexShrink:0, padding:'0 14px', height:'30px', display:'flex', alignItems:'center', borderRadius:'999px', border:'1px solid '+(on?gold:gold+'28'), color:on?gold:cream+'80', background:on?gold+'12':'transparent', fontFamily:"'Cormorant SC',serif", fontSize:'9px', letterSpacing:'.18em', cursor:'pointer', whiteSpace:'nowrap', transition:'all .3s' }
+      };
+    });
+    const dishCards = D.map((d, i) => ({ d, i }))
+      .filter(o => active === 'TOUS' || o.d.cat === active)
+      .map(o => {
+        const isSel = !!sel[o.i];
+        return {
+          name:o.d.name, desc:o.d.desc, price:o.d.price, image:o.d.image, signature:o.d.signature, isSel,
+          addSymbol: isSel ? '−' : '+',
+          onToggle: () => this.toggleSel(o.i),
+          cardStyle: { position:'relative', borderRadius:'12px', overflow:'hidden', display:'flex', flexDirection:'column', cursor:'pointer', border:'1px solid '+(isSel?gold:gold+'18'), background:'linear-gradient(180deg,#16110c,#0a0604)', boxShadow:isSel?'0 0 0 1px '+gold+'55':'none', transition:'all .2s' },
+          addStyle: { position:'absolute', top:'8px', right:'8px', width:'26px', height:'26px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', border:'1px solid '+(isSel?gold:gold+'55'), background:isSel?gold:'rgba(10,6,4,.8)', color:isSel?bg:gold, fontSize:'17px', fontFamily:"'Cormorant Garamond',serif", lineHeight:1, cursor:'pointer' }
+        };
+      });
+    const idxs = Object.keys(sel).filter(k => sel[k]).map(Number);
+    const count = idxs.length;
+    const totalNum = idxs.reduce((s, i) => s + parseInt(String(D[i].price).replace(/\s/g, ''), 10), 0);
+    const hasSel = count > 0;
+    return {
+      catChips, dishCards,
+      carteCount: count,
+      cartePlatLabel: count === 1 ? 'PLAT' : 'PLATS',
+      carteTotal: totalNum.toLocaleString('fr-FR') + ' XOF',
+      carteHasSel: hasSel,
+      ctaStyle: { padding:'0 16px', height:'38px', borderRadius:'999px', display:'flex', alignItems:'center', gap:'7px', fontSize:'10px', letterSpacing:'.14em', fontFamily:"'Cormorant SC',serif", border:'none', cursor:hasSel?'pointer':'default', background:hasSel?'linear-gradient(135deg,#d4b878,#b8954c)':gold+'30', color:hasSel?bg:gold, opacity:hasSel?1:.55, flexShrink:0, transition:'all .3s' }
+    };
+  }
+
+  renderVals() {
+    const A = this.acts();
+    return Object.assign({
+      menus: this.menus(),
+      total: '0' + A.length,
+      bNum: this.pad(this.state.b + 1),
+      bStage: this.stageB(),
+      bDots: this.dots(),
+    }, this.carteVals());
+  }
+}
+</script>
+</body>
+</html>
